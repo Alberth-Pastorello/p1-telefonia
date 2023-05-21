@@ -20,5 +20,8 @@ public class Assinante
         return cpf;
     }
 
-   
+    public String toString()
+    {
+        return "CPF: " + cpf + ", Nome: " + nome + ", Numero: " + numero;
+    }
 }
