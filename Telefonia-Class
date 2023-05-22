@@ -10,4 +10,78 @@ public class Telefonia {
         this.numPrePagos = 0;
         this.numPosPagos = 0;
     }
+    
+    // Cadastro de assinantes 
+    
+     public void cadastrarAssinante() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Digite o tipo do assinante (1 - Pre-pago / 2 - Pos-pago): ");
+        int tipo = scanner.nextInt();
+
+        if (tipo == 1) {
+            if (numPrePagos < prePagos.length) {
+                System.out.print("Digite o CPF do assinante: ");
+                long Cpf = scanner.nextLong();
+                scanner.nextLine(); //limpar o buffer
+
+                System.out.print("Digite o nome do assinante: ");
+                String Nome = scanner.nextLine();
+
+                System.out.print("Digite o nmero do telefone do assinante: ");
+                int Numero = scanner.nextInt();
+                
+                PrePago novoPrePago = new PrePago(Cpf, Nome, Numero);
+                prePagos[numPrePagos] = novoPrePago;
+                numPrePagos++;
+
+                System.out.println("Assinante pre-pago cadastrado com sucesso!");
+            } else {
+                System.out.println("Não há mais espaço para cadastrar novos assinantes pré-pagos.");
+            }
+        } else if (tipo == 2) {
+            if (numPosPagos < posPagos.length) {
+                System.out.print("Digite o CPF do assinante: ");
+                long Cpf = scanner.nextLong();
+                scanner.nextLine(); //limpar o buffer
+
+                System.out.print("Digite o nome do assinante: ");
+                String Nome = scanner.nextLine();
+
+                System.out.print("Digite o nmero do telefone do assinante: ");
+                int Numero = scanner.nextInt();
+
+                System.out.print("Digite o valor da fatura do assinante: ");
+                float Valor = scanner.nextFloat();
+
+                PosPago novoPosPago = new PosPago(Valor, Cpf, Nome, Numero);
+                posPagos[numPosPagos] = novoPosPago;
+                numPosPagos++;
+
+                System.out.println("Assinante pos-pago cadastrado com sucesso!");
+            } else {
+                System.out.println("Não há mais espaço para cadastrar novos assinantes pos-pagos.");
+            }
+          } else {
+            System.out.println("Tipo de assinante inválido.");
+        }
+    }
+
+    //Listagem de assinantes
+
+    public void listarAssinantes() {
+        System.out.println("Assinantes pré-pagos:");
+
+        for (int i = 0; i < numPrePagos; i++) {
+            System.out.println(prePagos[i].getCpf() + " - " + prePagos[i].nome
+            + " - " + prePagos[i].numero);
+        }
+
+        System.out.println("\nAssinantes pos-pagos:");
+
+        for (int i = 0; i < numPosPagos; i++) {
+            System.out.println(posPagos[i].getCpf() + " - " + posPagos[i].nome
+            + " - " + posPagos[i].numero);
+        }
+    }
 }
