@@ -201,4 +201,63 @@ public class Telefonia {
         		prePagos[i].imprimirFatura(mes);
         	}
         }
+        if(numPosPagos == 0) {
+    		System.out.print("sem fatura de assinates Pos-Pagos");
+    	}
+        else {
+        	for(int i = 0; i < numPosPagos; i++){
+        		posPagos[i].imprimirFatura(mes);
+        	}
+        }
+    }
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int opcao;
+
+        System.out.print("Iniciando sistema, digite qual o numero máximo usuários Pre-pago:");
+        int pre = scanner.nextInt();
+
+        System.out.print("digite qual o numero máximo usuários Pos-pago:");
+        int pos = scanner.nextInt();
+
+        Telefonia telefonia = new Telefonia(pre, pos);
+
+        do {
+            System.out.println("\n------ MENU ------\n");
+            System.out.println("1 - Cadastrar assinante");
+            System.out.println("2 - Listar assinantes");
+            System.out.println("3 - Fazer chamada");
+            System.out.println("4 - Fazer recarga");
+            System.out.println("5 - Imprimir faturas");
+            System.out.println("6 - Sair do programa");
+            System.out.print("\nEscolha uma op:");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcao) {
+                case 1:
+                    telefonia.cadastrarAssinante();
+                    break;
+                case 2:
+                    telefonia.listarAssinantes();
+                    break;
+                case 3:
+                    telefonia.fazerChamada();
+                    break;
+                case 4:
+                    telefonia.fazerRecarga();
+                    break;
+                case 5:
+                    telefonia.imprimirFaturas();
+                    break;
+                case 6:
+                    System.out.println("Encerrando o programa...");
+                    break;
+                default:
+                    System.out.println("Op invalida! Tente novamente.");
+                    break;
+            }
+        } while (opcao != 6);
+    }
 }
