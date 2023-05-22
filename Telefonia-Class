@@ -1,1 +1,13 @@
+public class Telefonia {
+    private PrePago[] prePagos;
+    private int numPrePagos;
+    private PosPago[] posPagos;
+    private int numPosPagos;
 
+    public Telefonia(int maxPrePagos, int maxPosPagos) {
+        this.prePagos = new PrePago[maxPrePagos];
+        this.posPagos = new PosPago[maxPosPagos];
+        this.numPrePagos = 0;
+        this.numPosPagos = 0;
+    }
+}
