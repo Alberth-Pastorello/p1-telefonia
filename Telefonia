@@ -84,4 +84,69 @@ public class Telefonia {
             + " - " + posPagos[i].numero);
         }
     }
+    
+    public void fazerChamada()
+    {
+    	Scanner scanner = new Scanner(System.in);
+        System.out.println("\n-- Fazer Chamada --");
+
+        System.out.print("Digite o CPF do assinante: ");
+        long cpf = scanner.nextLong();
+
+        System.out.print("Digite o tipo de assinante (1 - Pré-pago, 2 - Pós-pago): ");
+        int tipoAssinante = scanner.nextInt();
+
+        System.out.print("Digite a duracao da chamada: ");
+        int duracao = scanner.nextInt();
+        scanner.nextLine(); //limpar buffer
+        
+        System.out.print("Digite a data (dd/MM/yyyy): ");
+        String dataString = scanner.nextLine();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Date data = null;
+        try {
+            data = format.parse(dataString);
+        } catch (ParseException e) {
+            System.out.println("Data inválida. Certifique-se de usar o formato dd/MM/yyyy.");
+            return;
+        }
+
+        if (tipoAssinante == 1) {
+        	if(numPrePagos == 0) {
+        		System.out.print("lista de assinates Pre-Pagos vazia");
+        	}
+        	
+        	for(int i = 0; i < numPrePagos; i++)
+        	{
+        		if(prePagos[i].getCpf() == cpf)
+        		{
+        			prePagos[i].fazerChamada(data, duracao);
+        		}
+        		else
+        		{
+        			System.out.print("cpf invalido");
+        		}
+        	}
+        }
+        else if(tipoAssinante == 2){
+        	if(numPosPagos == 0) {
+        		System.out.print("lista de assinates Pos-Pagos vazia");
+        	}
+            for(int i = 0; i < numPosPagos; i++)
+            {
+                if(posPagos[i].getCpf() == cpf)
+                {
+                    posPagos[i].fazerChamada(data, duracao);
+                }
+                else
+                {
+                    System.out.print("cpf invalido");
+                }
+            }
+        }
+        else{
+            System.out.println("Tipo de assinante invlido.");
+        }
+    }
+    
 }
