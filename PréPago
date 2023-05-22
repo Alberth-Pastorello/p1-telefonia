@@ -35,3 +35,39 @@ public class PrePago extends Assinante {
             System.out.println("Não é possvel fazer mais recargas. O limite maximo de recargas foi atingido.");
         }
     }
+
+    public void imprimirFatura(int mes) {
+        System.out.println("=== Fatura PrePago ===");
+        System.out.println(toString());
+
+        float totalChamadas = 0;
+        float totalRecargas = 0;
+        for (int i = 0; i < numChamadas; i++) {
+            Chamada chamada = chamadas[i];
+            if (chamada.getData().getMonth() == mes - 1){
+                totalChamadas += 1.45 * chamada.getDuracao();
+                System.out.println(chamada.toString() + ", valor: " + 1.45 * chamada.getDuracao());
+            }
+        }
+        for (int i = 0; i < getNumRecargas(); i++) {
+            Recarga recarga = recargas[i];
+            if (recarga.getData().getMonth() == mes - 1) {
+                totalRecargas += recarga.getValor();
+                System.out.println(recarga.toString());
+            }
+        }
+
+        System.out.println("Total de chamadas: " + totalChamadas);
+        System.out.println("Total de recargas: " + totalRecargas);
+        System.out.println("Creditos: " + creditos);
+        if((totalChamadas - totalRecargas) > 0) {
+        	System.out.println("Total a pagar: " + (totalChamadas - totalRecargas));
+        }
+        else {
+        	System.out.println("Total a pagar: 0");
+        }
+    }
+	public int getNumRecargas() {
+		return numRecargas;
+	}
+}
