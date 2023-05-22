@@ -1,0 +1,15 @@
+
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+public class PrePago extends Assinante {
+    private Recarga[] recargas;
+    private int numRecargas;
+    private float creditos;
+
+    public PrePago(long cpf, String nome, int numero) {
+        super(cpf, nome, numero);
+        recargas = new Recarga[100];
+        numRecargas = 0;
+        creditos = 0;
+    }
