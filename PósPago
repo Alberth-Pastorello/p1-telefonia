@@ -11,3 +11,13 @@ public class PosPago extends Assinante{
         this.assinatura = assinatura;
         this.numChamadas = 0;
     }
+
+    public void fazerChamada(Date data, int duracao) {
+        if (numChamadas < 10) {
+            Chamada chamada = new Chamada(data, duracao);
+            chamadas[numChamadas] = chamada;
+            numChamadas++;
+        } else {
+            System.out.println("Não há espaço para mais chamadas.");
+        }
+    }
