@@ -149,4 +149,56 @@ public class Telefonia {
         }
     }
     
+    public void fazerRecarga()
+    {
+    	Scanner scanner = new Scanner(System.in);
+        System.out.print("Digite o CPF do assinante: ");
+        long cpf = scanner.nextLong();
+
+        System.out.print("Digite o valor da recarga: ");
+        int valorRecarga = scanner.nextInt();
+        scanner.nextLine(); //limpar buffer
+        
+        System.out.print("Digite a data (dd/MM/yyyy): ");
+        String dataString = scanner.nextLine();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Date data = null;
+        try {
+            data = format.parse(dataString);
+        } catch (ParseException e) {
+            System.out.println("Data inválida. Certifique-se de usar o formato dd/MM/yyyy.");
+            return;
+        }
+        
+    	if(numPrePagos == 0) {
+    		System.out.print("lista de assinates Pre-Pagos vazia");
+    	}
+
+            for(int i = 0; i < numPrePagos; i++)
+            {
+                if(prePagos[i].getCpf() == cpf)
+                {
+                    prePagos[i].recarregar(data, valorRecarga);
+                }
+                else
+                {
+                    System.out.print("cpf invalido");
+                }
+            }
+    }
+    
+    public void imprimirFaturas(){
+    	
+    	Scanner scanner = new Scanner(System.in);
+        System.out.print("Digite o mês (ex: 1): ");
+        int mes = scanner.nextInt();
+        
+        if(numPrePagos == 0) {
+        	System.out.print("sem fatura de assinates Pre-Pagos");
+        }
+        else {
+        	for(int i = 0; i < numPrePagos; i++){
+        		prePagos[i].imprimirFatura(mes);
+        	}
+        }
 }
